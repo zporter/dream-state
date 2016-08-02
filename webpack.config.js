@@ -2,13 +2,21 @@
 // CSS out of our bundle and output it to its own file.
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+// we'll add a const for where our elm source files live
+const elmSource = __dirname + "/web/elm"
+
 module.exports = {
-  // We'll change our entry point to look for an scss file instead
-  entry: ["./web/static/css/app.scss", "./web/static/js/app.js"],
+  entry: [
+    "./web/static/css/app.scss",
+    "./web/static/js/app.js",
+    "./web/elm/Main.elm"
+  ],
+
   output: {
     path: "./priv/static",
     filename: "js/app.js"
   },
+
   module: {
     loaders: [{
         test: /\.js$/,
@@ -40,8 +48,15 @@ module.exports = {
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'
+      },
+      {
+        test: /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        loader: "elm-webpack?cwd=" + elmSource
       }
-    ]
+    ],
+    // and we don't want to parse Elm files since they won't be using require or define calls
+    noParse: [/\.elm$/]
   },
 
   plugins: [
@@ -52,6 +67,8 @@ module.exports = {
     modulesDirectories: [
       "node_modules",
       __dirname + "/web/static/js"
-    ]
+    ],
+    // we need webpack to know it can resolve elm files
+    extensions: ['', '.scss', '.css', '.js', '.elm']
   }
 }
