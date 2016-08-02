@@ -18,20 +18,36 @@ module.exports = {
           presets: ["es2015"]
         }
       },
-      // We'll configure an scss loader
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style", "css")
+      },
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract(
           "style",
           "css!sass?includePaths[]=" + __dirname + "/node_modules"
         )
+      },
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octect-stream'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'
       }
     ]
   },
-  // And we'll add the plugin configuration
+
   plugins: [
     new ExtractTextPlugin("css/app.css")
   ],
+
   resolve: {
     modulesDirectories: [
       "node_modules",
