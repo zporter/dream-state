@@ -3,11 +3,8 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  // We'll add an entry point for CSS, which means our `entry` field must now
-  // be an array
-  entry: ["./web/static/css/app.css", "./web/static/js/app.js"],
-  // since we're no longer just outputting js, we'll tweak our output path and
-  // output filename for js.
+  // We'll change our entry point to look for an scss file instead
+  entry: ["./web/static/css/app.scss", "./web/static/js/app.js"],
   output: {
     path: "./priv/static",
     filename: "js/app.js"
@@ -21,10 +18,13 @@ module.exports = {
           presets: ["es2015"]
         }
       },
-      // We'll add a css loader
+      // We'll configure an scss loader
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", "css")
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+          "style",
+          "css!sass?includePaths[]=" + __dirname + "/node_modules"
+        )
       }
     ]
   },
