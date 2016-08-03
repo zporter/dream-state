@@ -1,5 +1,12 @@
 # DreamState
 
+## Configuration
+
+- Copy secret config files:
+  - `cp config/dev.secret.exs{.example,}`
+  - `cp config/test.secret.exs{.example,}`
+- Modify both `config/dev.secret.exs` and `config/test.secret.exs` to match your local settings.
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
