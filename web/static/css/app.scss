@@ -5,7 +5,11 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 /* Defaults (without Boostrap) from web/static/phoenix.css */
 
 /* Space out content a bit */
-body, form, ul, table {
+body {
+  margin-bottom: 20px;
+}
+
+form, ul, table {
   margin-top: 20px;
   margin-bottom: 20px;
 }
