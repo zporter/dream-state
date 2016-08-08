@@ -20,7 +20,9 @@ defmodule DreamState.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", DreamState do
-  #   pipe_through :api
-  # end
+  scope "/api", DreamState do
+    pipe_through :api
+
+    resources "/dream", DreamController, only: [:create]
+  end
 end
