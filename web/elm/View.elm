@@ -4,16 +4,16 @@ import Html exposing (..)
 import Html.Attributes exposing (class)
 import Html.App
 
-import Types exposing (Model, Msg (DreamInputMsg))
+import Types exposing (Model, Msg (DreamMsg))
 
-import DreamInput.View exposing (view)
+import Dream.New.View as NewDream exposing (view)
 
 view : Model -> Html Msg
 view model =
   div [ class "jumbotron" ] [
     div [ class "container" ] [
       siteHeader,
-      Html.App.map DreamInputMsg <| DreamInput.View.view model.dreamInput
+      Html.App.map DreamMsg <| NewDream.view model.newDream
     ]
   ]
 

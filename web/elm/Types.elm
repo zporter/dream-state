@@ -1,12 +1,13 @@
 module Types exposing (..)
 
-import DreamInput.Types exposing (DreamInput)
+import Dream.Types exposing (Msg)
+import Dream.New.Types as NewDream exposing (Dream)
 
 type alias Model =
   {
-    dreamInput : DreamInput
+    newDream : NewDream.Dream
   }
 
 type Msg =
   NoOp
-  | DreamInputMsg DreamInput.Types.Msg
+  | DreamMsg Dream.Types.Msg

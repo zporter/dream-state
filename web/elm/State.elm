@@ -1,13 +1,13 @@
 module State exposing (init, update, subscriptions)
 
-import Types exposing (Model, Msg (NoOp, DreamInputMsg))
+import Types exposing (Model, Msg (NoOp, DreamMsg))
 
-import DreamInput.State exposing (init, update, new)
+import Dream.New.State as NewDream exposing (init, update, new)
 
 init : (Model, Cmd Msg)
 init =
   let
-    model = Model DreamInput.State.new
+    model = Model NewDream.new
     cmds  = Cmd.none
   in
     (model, cmds)
@@ -18,14 +18,14 @@ update action model =
     NoOp ->
       ( model, Cmd.none )
 
-    DreamInputMsg msg ->
+    DreamMsg msg ->
       let
-        (newDreamInput, cmd) =
-          DreamInput.State.update msg model.dreamInput
+        (newDream, cmd) =
+          NewDream.update msg model.newDream
         newModel =
-          { model | dreamInput = newDreamInput }
+          { model | newDream = newDream }
       in
-        (newModel, Cmd.map DreamInputMsg cmd)
+        (newModel, Cmd.map DreamMsg cmd)
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
